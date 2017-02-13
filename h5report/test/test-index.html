@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+    <title>用于验证fullpage.js是否可用</title>
+    <style>
+        body{
+            margin:0;
+            padding:0;
+        }
+        .component{
+            width:50%;
+            height: 50px;
+            margin-bottom: 20px;
+            background-color: #eee;
+        }
+    </style>
+   <script type="text/javascript" src="../js/lib/jquery-2.1.0.js" ></script>
+   <script type="text/javascript" src="../js/lib/jquery-ui.js" ></script>
+   <script type="text/javascript" src="../js/lib/jquery.fullPage.js" ></script>
+   <script>
+   		$(function(){
+   			$("#h5").fullpage({
+   				'sectionsColor':['#254875','#00ff00','#254587','#695684'],
+   				//当前页面离开的时候执行的函数
+   				onLeave:function(index,nextIndex,direction){
+   					$("#h5").find(".page").eq(index-1).trigger("onLeave");
+   				},
+   				afteLoad:function(anchorLink,index){
+   					$("#h5").find(".page").eq(index-1).trigger("onLoad");
+   				}
+   				
+   			});
+   			$(".page").on('onLeave',function(){
+   				console.log($(this).attr('id'),"==>",'onLeave');
+   			})
+   			$(".page").on('onLoad',function(){
+   				console.log($(this).attr('id'),"==>",'onLoad');
+   			})
+   		})
+   </script>
+</head>
+<body>
+    <div id="h5">
+        <div class="page section" id="page-1">
+            <div class="component log">logo</div>
+            <div class="component slogan">slogan</div>
+        </div>
+        <div class="page section" id="page-2">
+            <div class="component desc">描述文件</div>
+        </div>
+        <div class="page section" id="page-3">
+            <div class="component bar">柱状图</div>
+        </div>
+
+    </div>
+</body>
+</html>
